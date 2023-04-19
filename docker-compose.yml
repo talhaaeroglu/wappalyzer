@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  wappalyzer:
+    image: wappalyzer/cli
+    container_name: wappalyzer-api
+    networks:
+      - wappalyzer-network
+
+  api-wrapper:
+    build:
+      context: .
+      dockerfile: Dockerfile.api-wrapper
+    ports:
+      - "4000:3000"
+    networks:
+      - wappalyzer-network
+
+networks:
+  wappalyzer-network:
+    driver: bridge
